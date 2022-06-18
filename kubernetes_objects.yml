@@ -1,0 +1,8 @@
+---
+- hosts: master
+  gather_facts: no
+  tasks:
+    - name: Running EC2 Role
+      include_role:
+        name: kubernetes_objects
+

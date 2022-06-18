@@ -1,0 +1,66 @@
+---
+# tasks file for kubernetes_objects
+  - name: create new dirctory for project playbooks
+    file:
+      path: /tmp/playbooks
+      state: directory
+      mode: "0755"
+  - name: copy and unpack project playbooks to master node
+    unarchive:
+      src: playbooks.tar.gz
+      dest: "/tmp/playbooks/"
+  - name: Apply metrics-server manifest to the cluster.
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/components.yaml
+
+  - name: Create email deployment and service
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/email-deploy-svc.yml
+
+  - name: Create checkout depolyment and service
+    shell:
+     cmd: kubectl apply -f  /tmp/playbooks/checkout-deploy-svc.yml
+
+  - name: Create recommendations depolyment and service
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/recommendations-deploy-svc.yml
+
+  - name: Create frontend deployment and service
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/frontend-deploy-svc.yml
+
+  - name: Create payment deployment and serive
+    shell: 
+     cmd: kubectl apply -f /tmp/playbooks/payment-deploy-svc.yml
+
+  - name: Create productcatalog deployment and service
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/productcatalog-deploy-svc.yml
+
+  - name: Create cart deployment and service
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/cartservice-deploy-svc.yml
+
+  - name: Create load Genartator depolyment and service
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/loadgator-deploy.yml
+
+  - name: Create Currency deployment and service
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/curancyservice-deploy-svc.yml
+
+  - name: Create shipping deployment and service
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/shippingservice-deploy-svc.yml
+
+  - name: Create redis-cart-db depolyment and service
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/radiscart-deploy-svc.yml
+
+  - name: Create AD deployment and service
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/adservice-deploy-svc.yml
+
+  - name: Create HPA objects for all deployments
+    shell:
+     cmd: kubectl apply -f /tmp/playbooks/HPA.yml

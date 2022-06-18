@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1 
+
+kind: RoleBinding 
+
+metadata: 
+
+  name: maydarous-developer-binding 
+
+subjects: 
+
+- kind: User 
+
+  name: maydarous # "name" is case sensitive 
+
+  apiGroup: rbac.authorization.k8s.io 
+
+roleRef: 
+
+  kind: Role 
+
+  name: newadmin 
+
+  apiGroup: rbac.authorization.k8s.io 
